@@ -3,13 +3,10 @@
 
 ```
 chap04 : 챕터04의 실습 자료입니다
-├─
-├─
-├─
-├─
-└─
+├─automatic-prompt-engineer : Automatic Prompt Engineer 실습 코드 입니다. 
+└─stable-diffusion : Stable Diffusion 실습 코드 입니다.
 
-※ 도서 내용 중에 해당 챕터 안에 실습자료가 없는 부분은 카페로 제보 해 주세요.
+※ 도서 내용 중에 해당 챕터 안에 실습자료가 없거나 잘못된 부분은 카페로 제보 해 주세요.
 ```
 
 <a href="https://cafe.naver.com/quickpass" target="_blank">
