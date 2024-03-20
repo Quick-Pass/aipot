@@ -102,6 +102,7 @@ The format you are informing us of is as follows. (remove 'Midjourney prompt:' !
             translated_wise_say = translate_contents(wise_say)
             translated_speakers = translate_contents(speaker)
 
+            # Stable Diffusion 에서 API 호출 시 필요한 파라미터
             image_generate_parameter = {
                 "prompt": "((Masterpiece, 4K UHD, highres))\n{} --ar 1:1".format(prompt),
                 "negative_prompt": "easynegative, NSFW, text, television, watermark, ng_deepnegative_v1_75t, paintings, sketches, (low quality:2), (normal quality:2), (worst quality:2), lowres, ((monochrome)), ((grayscale)), acnes, skin spots, age spot, skin blemishes, bad feet, ((wrong feet)), (wrong shoes), bad hands, distorted, blurry, missing fingers, multiple feet, bad knees, extra fingers, multiple bodies, multiple heads, multiple legs, multiple hands, deformed hands",
@@ -145,8 +146,11 @@ The format you are informing us of is as follows. (remove 'Midjourney prompt:' !
                 "scripts": None
             }
 
+            # Stable Diffusion API 주소로 파라미터를 같이 전달하여 호출한다.
             resp = requests.post("http://localhost:7860/sdapi/v1/txt2img", json=image_generate_parameter)
             json_obj = resp.json()
+            
+            # base64 형태로 생성된 이미지 데이터를 변수에 넣음
             base64_img_str = json_obj['images'][0]
             print(translated_wise_say, translated_speakers)
 
