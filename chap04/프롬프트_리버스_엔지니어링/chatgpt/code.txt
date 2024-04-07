@@ -1,0 +1,24 @@
+import cv2
+
+# 이미지 불러오기
+image = cv2.imread("image.jpg")
+
+# 이미지 변환 (흑백, 그레이스케일, 채널 분리)
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+b, g, r = cv2.split(image)
+
+# 특징 추출 (Canny edge detection, Harris corner detection)
+edges = cv2.Canny(gray, 100, 200)
+corners = cv2.goodFeaturesToTrack(gray, 25, 0.01, 10)
+
+# 객체 인식 (ORB feature detector and matcher)
+orb = cv2.ORB_create()
+keypoints, descriptors = orb.detectAndCompute(image, None)
+
+# 결과 출력
+cv2.imshow("Original", image)
+cv2.imshow("Grayscale", gray)
+cv2.imshow("Edges", edges)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
