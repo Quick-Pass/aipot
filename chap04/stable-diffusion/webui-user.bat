@@ -6,4 +6,5 @@ set VENV_DIR=
 set COMMANDLINE_ARGS=
 
 set COMMANDLINE_ARGS=--api --xformers
+
 call webui.bat
