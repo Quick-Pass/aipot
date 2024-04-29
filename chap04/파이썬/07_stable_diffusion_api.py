@@ -1,11 +1,8 @@
 import json
-import urllib.request # 사용할 패키지(모듈)는 
-                      # 가장 먼저 실행되어야 하므로
-                      # 파일 내용의 가장 위에 작성한다.
+import urllib.request # 사용할 패키지(모듈)는 가장 먼저 실행되어야 하므로 파일 내용의 가장 위에 작성한다.
 import base64         # base64를 처리하는 패키지이다.
 import io             # 파이썬에서 기본 입출력을 담당하는 패키지이다.
 from PIL import Image # 파이썬에서 이미지를 처리하는 패키지이다.
-
 
 def save_sd_image(image_obj): # 스테이블 디퓨전에서 생성한 이미지를 저장하는 함수
     base64_img_str = image_obj['images'][0] # 이미지 데이터를 변수에 대입한다.
@@ -14,22 +11,15 @@ def save_sd_image(image_obj): # 스테이블 디퓨전에서 생성한 이미지
     image = Image.open(io.BytesIO(image_data)) # 이미지 데이터를 변수에 대입한다.
     image.save("image.png") # image.png로 저장한다.
 
-
 if __name__ == "__main__": # 모듈이 메인모듈인지 확인한다.
-    # Stable Diffusion API를 통해 프롬프트 엔지니어링을 수행한다.
-    print("Stable Diffusion API를 통해 프롬프트 엔지니어링 수행")
-
     host = "http://127.0.0.1:7860" # 스테이블 디퓨전의 로컬 URL 주소
     end_point = "sdapi/v1/txt2img" # 
-
-    # 아래 url의 주소는 "http://127.0.0.1:7860/sdapi/v1/txt2img"이 된다.
-    url = "{}/{}".format(host, end_point)
-
+    
+    url = "{}/{}".format(host, end_point) # url의 주소는 "http://127.0.0.1:7860/sdapi/v1/txt2img"이 된다.
     print(url)
 
     prompt = "fairy in an enchanted forest" # 이미지를 그릴 프롬프트
     negative_prompt = "lowres, ugly face, poor hand, bended fingers" # 네거티브 프롬프트
-
     image_generate_parameter = {
         "prompt": prompt,
         "negative_prompt": negative_prompt,
@@ -43,6 +33,7 @@ if __name__ == "__main__": # 모듈이 메인모듈인지 확인한다.
         "sampler_index": "DPM++ 2M Karras", # 이미지를 그리는 방법(=Sampling methods)
         "n_iter": 1, # 이미지를 생성하는 반복 횟수를 지정(=Batch count)
         "batch_size": 1, # 한 번에 생성하는 이미지의 갯수를 지정(=Batch size)
+        "seed": -1,        
         "cfg_scale": 7,
         "enable_hr": False,
         "denoising_strength": 0.7,
@@ -54,7 +45,6 @@ if __name__ == "__main__": # 모듈이 메인모듈인지 확인한다.
         "hr_resize_x": 0,
         "hr_resize_y": 0,
         "styles": ["string"],
-        "seed": -1,
         "subseed": -1,
         "subseed_strength": 0,
         "seed_resize_from_h": -1,
@@ -70,6 +60,8 @@ if __name__ == "__main__": # 모듈이 메인모듈인지 확인한다.
         "script_args": [],
         "scripts": None
     }
+
+    print(image_generate_parameter)
 
     request = urllib.request.Request(
         url, # 스테이블 디퓨전의 API 호출 URL 주소를 지정한다.
@@ -87,8 +79,6 @@ if __name__ == "__main__": # 모듈이 메인모듈인지 확인한다.
         obj = json.loads(res_body.decode('utf-8')) # 응답을 JSON 객체로 감싼다.
         print("응답 결과 : {}".format(obj))
 
-        save_sd_image(obj) # 이미지를 저장하는 함수이다.
-                           # 스테이블 디퓨전이 생성한 데이터를 매개변수로 전달한다.
-
+        save_sd_image(obj) # 이미지를 저장하는 함수이다. 스테이블 디퓨전이 생성한 데이터를 매개변수로 전달한다.
     else: # 응답이 정상이 아닐 때 들여쓰기 된 코드들을 실행한다.
         print("응답 오류입니다. code : {}".format(rescode))

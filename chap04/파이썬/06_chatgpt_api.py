@@ -5,10 +5,10 @@ from openai import OpenAI # 사용할 패키지(모듈)는
 if __name__ == "__main__": # 모듈이 메인모듈인지 확인한다.
     print("ChatGPT API를 통해 프롬프트 엔지니어링 수행")
 
-    txt_prompt = "프롬프트 엔지니어링에 대해 100자 이내로 설명해줘"
+    txt_prompt = "동남아 국가 중 관광명소 1개만 알려줘"
     print("질의할 프롬프트 : {}".format(txt_prompt))
 
-    client = OpenAI(api_key = "이 곳에 오픈AI에서 발급받은 API 키를 입력한다.")
+    client = OpenAI(api_key = "이 곳에 ChatGPT API 키를 입력해주세요.")
 
     completion = client.chat.completions.create(
         model="gpt-4", # GPT-4 모델을 사용한다.
