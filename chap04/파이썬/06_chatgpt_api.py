@@ -5,7 +5,7 @@ from openai import OpenAI # 사용할 패키지(모듈)는
 if __name__ == "__main__": # 모듈이 메인모듈인지 확인한다.
     print("ChatGPT API를 통해 프롬프트 엔지니어링 수행")
 
-    txt_prompt = "동남아 국가 중 관광명소 1개만 알려줘"
+    txt_prompt = "제주도 2박 3일 여행계획을 세워줘"
     print("질의할 프롬프트 : {}".format(txt_prompt))
 
     client = OpenAI(api_key = "이 곳에 ChatGPT API 키를 입력해주세요.")
